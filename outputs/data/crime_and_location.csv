@@ -1,0 +1,21 @@
+crime_category,area_category,arrest_count
+Controlled Drugs and Substances Act,GTA,1215
+Controlled Drugs and Substances Act,downtown,754
+Controlled Drugs and Substances Act,midtown,19
+Crimes Against Property,GTA,8176
+Crimes Against Property,downtown,4305
+Crimes Against Property,midtown,185
+Crimes Against the Person,GTA,9624
+Crimes Against the Person,downtown,3382
+Crimes Against the Person,midtown,215
+Criminal Code Traffic,GTA,208
+Criminal Code Traffic,downtown,64
+Criminal Code Traffic,midtown,8
+Other Criminal Code Violations,GTA,8332
+Other Criminal Code Violations,downtown,4480
+Other Criminal Code Violations,midtown,142
+Other Federal Statute Violations,GTA,7
+Other Federal Statute Violations,downtown,1
+Total Arrests,GTA,16945
+Total Arrests,downtown,7971
+Total Arrests,midtown,355

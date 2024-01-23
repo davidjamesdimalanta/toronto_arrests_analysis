@@ -1,0 +1,46 @@
+crime_category,age_cohort,arrest_count
+Controlled Drugs and Substances Act,18 to 24,474
+Controlled Drugs and Substances Act,25 to 34,686
+Controlled Drugs and Substances Act,35 to 44,429
+Controlled Drugs and Substances Act,45 to 54,205
+Controlled Drugs and Substances Act,55 to 64,100
+Controlled Drugs and Substances Act,65+,4
+Controlled Drugs and Substances Act,<18,90
+Crimes Against Property,18 to 24,2278
+Crimes Against Property,25 to 34,4122
+Crimes Against Property,35 to 44,2831
+Crimes Against Property,45 to 54,1663
+Crimes Against Property,55 to 64,773
+Crimes Against Property,65+,151
+Crimes Against Property,<18,848
+Crimes Against the Person,18 to 24,2207
+Crimes Against the Person,25 to 34,4080
+Crimes Against the Person,35 to 44,2858
+Crimes Against the Person,45 to 54,1706
+Crimes Against the Person,55 to 64,879
+Crimes Against the Person,65+,248
+Crimes Against the Person,<18,1243
+Criminal Code Traffic,18 to 24,49
+Criminal Code Traffic,25 to 34,111
+Criminal Code Traffic,35 to 44,58
+Criminal Code Traffic,45 to 54,36
+Criminal Code Traffic,55 to 64,10
+Criminal Code Traffic,65+,2
+Criminal Code Traffic,<18,14
+Other Criminal Code Violations,18 to 24,2408
+Other Criminal Code Violations,25 to 34,4350
+Other Criminal Code Violations,35 to 44,2937
+Other Criminal Code Violations,45 to 54,1545
+Other Criminal Code Violations,55 to 64,609
+Other Criminal Code Violations,65+,140
+Other Criminal Code Violations,<18,965
+Other Federal Statute Violations,25 to 34,5
+Other Federal Statute Violations,35 to 44,2
+Other Federal Statute Violations,45 to 54,1
+Total Arrests,18 to 24,4378
+Total Arrests,25 to 34,8013
+Total Arrests,35 to 44,5680
+Total Arrests,45 to 54,3345
+Total Arrests,55 to 64,1621
+Total Arrests,65+,408
+Total Arrests,<18,1826
