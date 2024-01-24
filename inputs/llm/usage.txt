@@ -84,3 +84,116 @@ expect_true(all(
 # (Replace 100 with the expected number of rows)
 expect_true(nrow(cleaned_data) == 100, "Row count does not match expected value.")
 This code provides a basic framework for testing your CSV file. You can adjust the expected values and conditions according to the specific requirements and characteristics of your data. Additionally, if there are more specific business rules or data integrity constraints relevant to your dataset, you should add tests to cover those as well.
+
+---------
+User
+this:
+"str_detect(crime_neighbourhood,
+                 "\\(1\\)|\\(2\\)|\\(3\\)|\\(4\\)|\\(5\\)|\\(6\\)") ~ "Ward 1","
+
+ is the format for: Ward 1: 1-6
+
+complete the rest for:
+Ward 5: 28-30, 110-113, 115
+
+Ward 7: 21-25, 154
+
+Ward 13: 72, 73, 167, 168
+
+Ward 16: 42-45, 149-150
+
+Ward 18: 36-38, 50, Yonge-doris, avondale
+
+Ward 20: 120-124, 139
+
+Ward 21: 119, 125-127, 137, 156-157, 142
+
+Ward 22: 116-118, 128-129
+
+Ward 24: 140-141, 135
+
+ChatGPT
+Certainly! The str_detect function should be used with regular expressions to match the neighborhood numbers. Here's how you can write the code for all the specified wards:
+
+r
+Copy code
+library(stringr)
+
+location_based_data <- cleaned_arrest_data %>%
+  mutate(
+    area_category = case_when(
+      str_detect(crime_neighbourhood, "\\(1\\)|\\(2\\)|\\(3\\)|\\(4\\)|\\(5\\)|\\(6\\)") ~ "Ward 1",
+      str_detect(crime_neighbourhood, "\\(28\\)|\\(29\\)|\\(30\\)|\\(110\\)|\\(111\\)|\\(112\\)|\\(113\\)|\\(115\\)") ~ "Ward 5",
+      str_detect(crime_neighbourhood, "\\(21\\)|\\(22\\)|\\(23\\)|\\(24\\)|\\(25\\)|\\(154\\)") ~ "Ward 7",
+      str_detect(crime_neighbourhood, "\\(72\\)|\\(73\\)|\\(167\\)|\\(168\\)") ~ "Ward 13",
+      str_detect(crime_neighbourhood, "\\(42\\)|\\(43\\)|\\(44\\)|\\(45\\)|\\(149\\)|\\(150\\)") ~ "Ward 16",
+      str_detect(crime_neighbourhood, "\\(36\\)|\\(37\\)|\\(38\\)|\\(50\\)|Yonge-doris|avondale") ~ "Ward 18",
+      str_detect(crime_neighbourhood, "\\(120\\)|\\(121\\)|\\(122\\)|\\(123\\)|\\(124\\)|\\(139\\)") ~ "Ward 20",
+      str_detect(crime_neighbourhood, "\\(119\\)|\\(125\\)|\\(126\\)|\\(127\\)|\\(137\\)|\\(156\\)|\\(157\\)|\\(142\\)") ~ "Ward 21",
+      str_detect(crime_neighbourhood, "\\(116\\)|\\(117\\)|\\(118\\)|\\(128\\)|\\(129\\)") ~ "Ward 22",
+      str_detect(crime_neighbourhood, "\\(140\\)|\\(141\\)|\\(135\\)") ~ "Ward 24",
+      TRUE ~ "GTA"
+    )
+  )
+Please note that for "Yonge-doris" and "avondale," since these do not have a number associated with them in the format "(number)", you would either need the exact strings that appear in crime_neighbourhood to match them, or you could add additional logic to handle these cases if the neighborhood names are consistent.
+
+The str_detect function expects a pattern, and if you're checking for strings without a numeric pattern, you would need to adjust the pattern accordingly. If "Yonge-doris" and "avondale" are part of a larger string and you only have these parts, you may need to include additional context or use a partial string matching approach.
+
+--------
+User
+---
+title: "Arrested and Charged Persons Analysis"
+author: "David James Dimalanta"
+date: today
+date-format: long
+abstract: |
+  "This study investigates the correlation between socio-economic status and law enforcement activities in Toronto by analyzing arrest count data and median household income across the city's wards. Utilizing data from the Toronto Police Service and the 2021 Toronto Census, the research reveals significant disparities in arrest counts between wards categorized as 'low-income household neighbourhoods' and 'high-income household neighbourhoods.' Notably, it was found that some low-income areas, such as Ward 20 (Scarborough-Agincourt), experience higher arrest counts, while certain high-income wards like Ward 10 (Spadina-Fort York) also report substantial arrest figures, illustrating that socio-economic status is not a singular predictor of law enforcement activity. The findings of this study are crucial for urban policymakers and planners, as they underscore the complex interplay between socio-economic factors and crime within urban settings, highlighting the need for nuanced approaches to law enforcement and social policy in diverse urban communities."
+format: pdf
+toc: true
+toc-depth: 5
+number-sections: true
+bibliography: references.bib
+---
+Code and data from this analysis are available at: https://github.com/davidjamesdimalanta/toronto_arrests_analysis
+
+
+how to turn:"Code and data from this analysis are available at: https://github.com/davidjamesdimalanta/toronto_arrests_analysis"
+
+into a foot note in this quarto file
+
+ChatGPT
+To add a footnote that will appear under the table of contents in your Quarto PDF document, you can use the header-includes field in your YAML header to insert LaTeX commands that Quarto will pass through when it generates the LaTeX file. Here's how you can modify your YAML to include the footnote:
+
+yaml
+Copy code
+---
+title: "Arrested and Charged Persons Analysis"
+author: "David James Dimalanta"
+date: today
+date-format: long
+abstract: |
+  "This study investigates the correlation between socio-economic status and law enforcement activities in Toronto by analyzing arrest count data and median household income across the city's wards. Utilizing data from the Toronto Police Service and the 2021 Toronto Census, the research reveals significant disparities in arrest counts between wards categorized as 'low-income household neighbourhoods' and 'high-income household neighbourhoods.' Notably, it was found that some low-income areas, such as Ward 20 (Scarborough-Agincourt), experience higher arrest counts, while certain high-income wards like Ward 10 (Spadina-Fort York) also report substantial arrest figures, illustrating that socio-economic status is not a singular predictor of law enforcement activity. The findings of this study are crucial for urban policymakers and planners, as they underscore the complex interplay between socio-economic factors and crime within urban settings, highlighting the need for nuanced approaches to law enforcement and social policy in diverse urban communities."
+format: pdf
+toc: true
+toc-depth: 5
+number-sections: true
+bibliography: references.bib
+header-includes:
+  - |
+    \usepackage{titling}
+    \pretitle{\begin{center}\LARGE\bfseries}
+    \posttitle{\end{center}\vskip 0.5em}
+    \preauthor{\begin{center}\large}
+    \postauthor{\end{center}\vskip 0.5em}
+    \predate{\begin{center}\large}
+    \postdate{\end{center}\vskip 0.5em\footnotesize{Code and data from this analysis are available at: \url{https://github.com/davidjamesdimalanta/toronto_arrests_analysis}}}
+---
+What this YAML does:
+
+The header-includes field is used to specify raw LaTeX commands.
+The \usepackage{titling} command is included to ensure that the predate and postdate hooks work as expected.
+The predate and postdate commands are redefined to include the footnote text right after the date on the title page.
+When you compile this document, the footnote should appear on the first page of your document, below the date. If you specifically want the footnote to appear only under the table of contents and not on the title page, you may need to use a LaTeX \footnotetext command, and it will require custom LaTeX placement. This can get quite complex and may not be directly supported via YAML but rather through inline LaTeX commands in the body of your document right after the table of contents directive.
+
+
+
