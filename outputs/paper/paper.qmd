@@ -35,7 +35,7 @@ library(ggplot2)
 
 # Introduction {#intro}
 
-This paper presents a detailed analysis of arrest counts and median household income across the various wards of Toronto, drawing on data from the 'Police Annual Statistical Report - Arrested and Charged Persons' and the 'Ward Profiles (25-Ward Model)'. The broader context of this study is to understand how socio-economic factors, particularly income levels, correlate with law enforcement activities within an urban landscape. This research addresses a critical gap in understanding the dynamics of crime and socio-economic status within a city, offering insights into the intricate relationship between median household income and arrest frequencies across different wards. The findings are visually represented in subsequent sections, notably in [Figure 1](#Figure1) and [Tables 1](#table1) and [2.1](#table2.1).
+This paper presents a detailed analysis of arrest counts and median household income across the various wards of Toronto, drawing on data from the 'Police Annual Statistical Report - Arrested and Charged Persons' and the 'Ward Profiles (25-Ward Model)'. The broader context of this study is to understand how socio-economic factors, particularly income levels, correlate with law enforcement activities within an urban landscape. This research addresses a critical gap in understanding the dynamics of crime and socio-economic status within a city, offering insights into the intricate relationship between median household income and arrest frequencies across different wards.
 
 The methodology involved collecting and analyzing data using R programming software and several R libraries, including tidyverse, ggplot2, dplyr, and others. The arrest data was meticulously cleaned and reorganized into a ward-based structure to enable effective cross-referencing with the Toronto Census Data, thereby enhancing the potential for nuanced analyses. One of the key findings of this study is the notable variance in arrest counts between "low-income household neighbourhoods" and "high-income household neighbourhoods." For instance, Ward 20 (Scarborough-Agincourt), classified as a low-income area, exhibited the highest arrest count, while high-income areas like Ward 10 (Spadina-Fort York) also reported substantial arrest figures.
 
@@ -51,10 +51,11 @@ The arrest count dataset, provided by the Toronto Police Services, offers a comp
 
 The dataset was cleaned and restructured into a ward-based format, aligning it with the Toronto Census Data's structure. This transformation facilitates a more effective comparison and cross-referencing between socio-economic factors and law enforcement data. The cleaning and restructuring process involved advanced functions from R libraries like dplyr and stringr, adhering to the spatial classifications of the City of Toronto's 'Neighbourhoods & Communities' [@TOneighbourhoods] map.
 
-A sample of the cleaned arrest data, as shown in Table 1, highlights the initial dataset's structure: {#table1}
+A sample of the cleaned arrest data, as shown in Table 1, highlights the initial dataset's structure:
 
 ```{r}
 #| echo: false
+#| label: fig-samplearrestcount
 cleaned_arrest_data <- read_csv("../data/cleaned_arrest_data.csv")
 sample_data <- head(cleaned_arrest_data, 5) |>
 select(x_id, crime_neighbourhood, arrest_count)
@@ -68,10 +69,11 @@ The census data, sourced from OpenDataToronto's 'Ward Profiles (25-Ward Model)',
 
 The census data underwent a significant cleaning process, drawing methodologies from a colleague's repository [@thomaswilliamfox/toronto_child_care_2024]. This process included data transformation techniques, utilizing R's `janitor` and `tidyverse` libraries, to ensure the data's usability and integrity.
 
-A snippet of the census data, represented in Table 2, showcases the median income across different wards: {#table2}
+A snippet of the census data, represented in Table 2, showcases the median income across different wards:
 
 ```{r}
 #| echo: false
+#| label: fig-samplecensusdatabyward
 filtered_census_data <- read_csv("../data/filtered_census_data.csv")
 sample_census_data <- head(filtered_census_data, 6) |>
   slice(1:26) |>
@@ -97,9 +99,10 @@ Among the "high-income household neighbourhoods," Ward 10 (Spadina-Fort York) st
 
 The data also reveals that the lowest arrest count across all wards is in Ward 23 (Scarborough North), a high-income neighbourhood, with only 2,487 arrests. 
 
-To visually represent these disparities in arrest counts across the wards, the following graph has been created using the `ggplot2` package in R. This graph provides a clear and comprehensive illustration of the arrest patterns in Toronto's wards: {#Figure1}
+To visually represent these disparities in arrest counts across the wards, the following graph has been created using the `ggplot2` package in R. This graph provides a clear and comprehensive illustration of the arrest patterns in Toronto's wards:
 ```{r}
 #| echo: false
+#| label: fig-arrestcount
 summarized_data <- read_csv("../data/summarized_data.csv")
 ggplot(summarized_data,
        aes(x = factor(ward, levels = c(
@@ -129,6 +132,7 @@ The following table displays a subset of the census data, offering a snapshot of
 
 ```{r}
 #| echo: false
+#| label: fig-censusdatabyward
 paper_census_data <- read_csv("../data/filtered_census_data.csv") |>
   select(ward, med_income)
 kable(paper_census_data, format = "pipe", caption = "Table 2.1: Census Data by Ward")
@@ -136,7 +140,7 @@ kable(paper_census_data, format = "pipe", caption = "Table 2.1: Census Data by W
 
 # Discussion {#sec-discussion}
 
-The analysis of Toronto's census data juxtaposed with arrest counts across various wards presents a multifaceted understanding of the city's socio-economic landscape and its correlation with law enforcement activities. This discussion aims to explore the underlying patterns and potential implications revealed by the results.
+The analysis of Toronto's census data juxtaposed with arrest counts from @fig-arrestcount, across various wards depicted in @fig-censusdatabyward presents a multifaceted understanding of the city's socio-economic landscape and its correlation with law enforcement activities. This discussion aims to explore the underlying patterns and potential implications revealed by the results.
 
 ## Socio-Economic Disparities and Law Enforcement
 
@@ -154,7 +158,7 @@ The analysis of median household incomes across wards reveals significant dispar
 
 ## Limitations and Further Research
 
-While this analysis sheds light on certain patterns, it is important to note the limitations inherent in such a study. The data does not account for the complexities and nuances of individual neighbourhoods or the myriad factors that influence both crime rates and law enforcement activities. Further research, perhaps incorporating qualitative studies and more granular data, could provide a deeper understanding of the intricate relationship between socio-economic factors and law enforcement in urban settings.
+While this analysis sheds light on certain patterns, it is important to note the limitations inherent in such a study. The census data from @fig-censusdatabyward does not account for the complexities and nuances of individual neighbourhoods or the myriad factors that influence both crime rates and law enforcement activities in @fig-arrestcount. Further research, perhaps incorporating qualitative studies and more granular data, could provide a deeper understanding of the intricate relationship between socio-economic factors and law enforcement in urban settings.
 
 # Conclusion {#sec-conclusion}
 
