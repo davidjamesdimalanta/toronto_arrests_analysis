@@ -14,9 +14,9 @@ header-includes:
   - |
     \usepackage{titling}
     \pretitle{\begin{center}\LARGE\bfseries}
-    \posttitle{\end{center}\vskip 0.5em}
+    \posttitle{\end{center}}
     \preauthor{\begin{center}\large}
-    \postauthor{\end{center}\vskip 0.5em}
+    \postauthor{\end{center}}
     \predate{\begin{center}\large}
     \postdate{\end{center}\vskip 0.5em\footnotesize{Code and data from this analysis are available at: \url{https://github.com/davidjamesdimalanta/toronto_arrests_analysis}}}
 ---
@@ -59,7 +59,7 @@ A sample of the cleaned arrest data, as shown in Table 1, highlights the initial
 cleaned_arrest_data <- read_csv("../data/cleaned_arrest_data.csv")
 sample_data <- head(cleaned_arrest_data, 5) |>
 select(x_id, crime_neighbourhood, arrest_count)
-kable(sample_data, format = "pipe", caption = "Table 1: Sample of Cleaned Arrest Count Data")
+kable(sample_data, format = "pipe", caption = "Sample of Cleaned Arrest Count Data")
 ```
 
 
@@ -78,7 +78,7 @@ filtered_census_data <- read_csv("../data/filtered_census_data.csv")
 sample_census_data <- head(filtered_census_data, 6) |>
   slice(1:26) |>
   select(ward, med_income)
-kable(sample_census_data, format = "pipe", caption = "Table 2: Sample of Census Data by Ward")
+kable(sample_census_data, format = "pipe", caption = "Sample of Census Data by Ward")
 ```
 
 ## Summary Statistics and Relationships
@@ -103,6 +103,7 @@ To visually represent these disparities in arrest counts across the wards, the f
 ```{r}
 #| echo: false
 #| label: fig-arrestcount
+#| fig-cap: Toronto Arrest Count by Ward from 2015 to 2023
 summarized_data <- read_csv("../data/summarized_data.csv")
 ggplot(summarized_data,
        aes(x = factor(ward, levels = c(
@@ -116,7 +117,7 @@ ggplot(summarized_data,
           "23", "25"
        )), y = arrest_count)) +
   geom_bar(stat = "identity") +
-  labs(title = "Figure 1: Toronto Arrest Count by Ward",
+  labs(title = "Toronto Arrest Count by Ward",
        x = "Ward", y = "Arrest Count")
 ```
 
@@ -135,7 +136,7 @@ The following table displays a subset of the census data, offering a snapshot of
 #| label: fig-censusdatabyward
 paper_census_data <- read_csv("../data/filtered_census_data.csv") |>
   select(ward, med_income)
-kable(paper_census_data, format = "pipe", caption = "Table 2.1: Census Data by Ward")
+kable(paper_census_data, format = "pipe", caption = "Census Data by Ward")
 ```
 
 # Discussion {#sec-discussion}
