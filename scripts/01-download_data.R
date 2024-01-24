@@ -14,7 +14,6 @@ library(knitr)
 library(ggplot2)
 library(testthat)
 
-
 # Get ARRESTS COUNTS package
 package <- show_package(
   "police-annual-statistical-report-arrested-and-charged-persons"
@@ -38,7 +37,6 @@ raw_arrest_data <-
   get_resource()
 
 raw_arrest_data
-
 
 # Generating the Data into a CSV file in 'inputs/data'
 write.csv(raw_arrest_data, file = "inputs/data/raw_arrest_data.csv",

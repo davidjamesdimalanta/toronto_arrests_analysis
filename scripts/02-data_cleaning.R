@@ -31,6 +31,85 @@ options(scipen = 999)
 # save arrest data
 write_csv(cleaned_arrest_data, "outputs/data/cleaned_arrest_data.csv")
 
+# Read the Arrest Count data
+cleaned_arrest_data <- read_csv("outputs/data/cleaned_arrest_data.csv")
+
+# sort and export arrest counts by age cohort
+age_data <- cleaned_arrest_data |>
+  group_by(age_cohort) |>
+  summarise(arrest_count = sum(arrest_count, na.rm = TRUE))
+
+write_csv(age_data, "outputs/data/age_data.csv")
+
+# sort and export neighbourhoods by general location
+location_based_data <- cleaned_arrest_data |>
+  mutate(
+    ward = case_when(
+      str_detect(crime_neighbourhood,
+                 "\\(1|2|3|4|5|6)\\") ~ "1",
+      str_detect(crime_neighbourhood,
+                 "\\(15|28|29|30|110|111|112|113|115|160\\)") ~ "5",
+      str_detect(crime_neighbourhood,
+                 "\\(21|22|23|24|25|154\\)") ~ "7",
+      str_detect(crime_neighbourhood,
+                 "\\(72|73|167|168\\)") ~ "13",
+      str_detect(crime_neighbourhood,
+                 "\\(42|43|44|45|149|150\\)") ~ "16",
+      str_detect(crime_neighbourhood,
+                 "\\(36|37|38|50|151|152|153\\)") ~ "18",
+      str_detect(crime_neighbourhood,
+                 "\\(78|120|121|122|123|124|139|164\\)") ~ "20",
+      str_detect(crime_neighbourhood,
+                 "\\(119|125|126|127|137|156|157|142\\)") ~ "21",
+      str_detect(crime_neighbourhood,
+                 "\\(116|117|118|128|129\\)") ~ "22",
+      str_detect(crime_neighbourhood,
+                 "\\(140|141|135\\)") ~ "24",
+      str_detect(crime_neighbourhood,
+                 "\\((7|8|9|10|11|12|13|159)\\)") ~ "2",
+      str_detect(crime_neighbourhood,
+                 "\\((14|15|16|17|18|19|20)\\)") ~ "3",
+      str_detect(crime_neighbourhood,
+                 "\\((83|84|85|86|87|88|89|90|95|114)\\)") ~ "4",
+      str_detect(crime_neighbourhood,
+                 "\\((155|26|27|33|34|35)\\)") ~ "6",
+      str_detect(crime_neighbourhood,
+                 "\\((31|32|39|100|102|103|105|108)\\") ~ "8",
+      str_detect(crime_neighbourhood,
+                 "\\((91|92|93|109|172)\\)") ~ "9",
+      str_detect(crime_neighbourhood,
+                 "\\((162|163|165|166|169|170)\\)") ~ "10",
+      str_detect(crime_neighbourhood,
+                 "\\((79|80|81|71|74|75)\\)") ~ "11",
+      str_detect(crime_neighbourhood,
+                 "\\((94|96|97|98|99|101|104|107)\\)") ~ "12",
+      str_detect(crime_neighbourhood,
+                 "\\((57|58|59|65|66|67|68|69|70)\\)") ~ "14",
+      str_detect(crime_neighbourhood,
+                 "\\((41|55|56)\\)") ~ "15",
+      str_detect(crime_neighbourhood,
+                 "\\((46|47|48|49|52|53)\\)") ~ "17",
+      str_detect(crime_neighbourhood,
+                 "\\((54|60|61|62|63|64)\\)") ~ "19",
+      str_detect(crime_neighbourhood,
+                 "\\(130)\\") ~ "23",
+      str_detect(crime_neighbourhood,
+                 "\\((131|133|134|136|143)\\)") ~ "25",
+      TRUE ~ "GTA"
+    ),
+  )
+
+write_csv(location_based_data, "outputs/data/location_based_data.csv")
+
+# sort and export arrest count by ward
+summarized_data <- location_based_data |>
+  filter(ward != "GTA") |>
+  group_by(ward) |>
+  summarise(arrest_count = sum(arrest_count, na.rm = TRUE))
+
+write_csv(summarized_data, "outputs/data/summarized_data.csv")
+
+
 
 ### Leveraged Code From https://github.com/ThomasWilliamFox/toronto_child_care
 # Read and clean 2021 Canada census data
@@ -118,79 +197,9 @@ write_csv(ward_name_data, "outputs/data/ward_names.csv")
 
 ### (END OF LEVERAGED CODE) ###
 
-unique(cleaned_arrest_data$crime_neighbourhood)
+# filter census data to only show ward #, average, and median HH income
+filtered_census_data <- cleaned_census_data |>
+  select(ward, avg_income, med_income)
 
-# Read the Arrest Count data
-cleaned_arrest_data <- read_csv("outputs/data/cleaned_arrest_data.csv")
-
-# sort and export arrest counts by age cohort
-age_data <- cleaned_arrest_data |>
-  group_by(age_cohort) |>
-  summarise(arrest_count = sum(arrest_count, na.rm = TRUE))
-
-write_csv(age_data, "outputs/data/age_data.csv")
-
-# sort and export neighbourhoods by general location
-location_based_data <- cleaned_arrest_data |>
-  mutate(
-    area_category = case_when(
-      crime_neighbourhood %in% c("Harbourfront-CityPlace (165)",
-        "Kensington-Chinatown (78)",
-        "Wellington Place (164)",
-        "St Lawrence-East Bayfront-The Islands (166)",
-        "West Queen West (162)",
-        "Downtown Yonge East (168)",
-        "University (79)", "Yonge-Bay Corridor (170)",
-        "South Parkdale (85)", "Moss Park (73)",
-        "Trinity-Bellwoods (81)", "The Beaches (63)",
-        "North Riverdale (68)",
-        "Palmerston-Little Italy (80)",
-        "Fort York-Liberty Village (163)",
-        "Annex (95)",
-        "South Riverdale (70)", "Regent Park (72)",
-        "High Park North (88)", "Yonge-Eglinton (100)",
-        "High Park-Swansea (87)",
-        "Cabbagetown-South St.James Town (71)",
-        "Church-Wellesley (167)",
-        "Bay-Cloverhill (169)",
-        "Dovercourt Village (172)",
-        "Rosedale-Moore Park (98)",
-        "Wychwood (94)",
-        "Runnymede-Bloor West Village (89)"
-      ) ~ "downtown",
-      crime_neighbourhood %in% c("Casa Loma (96)", "Mount Pleasant East (99)",
-                                 "Yonge-St.Clair (97)",
-                                 "Forest Hill South (101)",
-                                 "Bedford Park-Nortown (39)",
-                                 "Lawrence Park South (103)",
-                                 "Bridle Path-Sunnybrook-York Mills (41)",
-                                 "Forest Hill North (102)",
-                                 "Lawrence Park North (105)") ~ "midtown",
-      TRUE ~ "GTA"
-    )
-  )
-write_csv(location_based_data, "outputs/data/location_based_data.csv")
-
-# sort and export arrest count by general location
-summarized_data <- location_based_data |>
-  filter(arrest_year == 2019) |>
-  group_by(area_category) |>
-  summarise(arrest_count = sum(arrest_count, na.rm = TRUE))
-
-write_csv(summarized_data, "outputs/data/summarized_data.csv")
-
-# sort and export arrest count by general location and type of crime
-crime_and_location <- location_based_data |>
-  filter(arrest_year == 2019) |>
-  group_by(crime_category, area_category) |>
-  summarise(arrest_count = sum(arrest_count, na.rm = TRUE))
-
-write_csv(crime_and_location, "outputs/data/crime_and_location.csv")
-
-# Sort and export data of Age Cohort and Crime Category
-crime_and_age <- cleaned_arrest_data |>
-  filter(arrest_year == 2019) |>
-  group_by(crime_category, age_cohort) |>
-  summarise(arrest_count = sum(arrest_count, na.rm = TRUE))
-
-write_csv(crime_and_age, "outputs/data/crime_and_age.csv")
+head(filtered_census_data)
+write_csv(filtered_census_data, "outputs/data/filtered_census_data.csv")

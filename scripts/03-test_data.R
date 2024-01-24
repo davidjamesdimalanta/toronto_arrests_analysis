@@ -28,10 +28,10 @@ expect_true(is.character(cleaned_arrest_data$crime_neighbourhood),
             "crime_neighbourhood is not a character column.")
 expect_true(is.character(cleaned_arrest_data$sex),
             "sex is not a character column.")
-expect_true(is.integer(cleaned_arrest_data$x_id),
-            "id is not an integer")
-expect_true(is.integer(cleaned_arrest_data$arrest_year),
-            "arrest_year is not an integer")
+expect_true(is.double()(cleaned_arrest_data$x_id),
+            "id is not an double")
+expect_true(is.double()(cleaned_arrest_data$arrest_year),
+            "arrest_year is not an double")
 
 # Checking for Missing Values
 expect_true(all(complete.cases(cleaned_arrest_data)),
