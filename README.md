@@ -1,6 +1,6 @@
 # Socio-Economic Disparities and Law Enforcement in Toronto: An Analysis of Arrest Trends and Median Household Income Across City Wards
-## Abstract
-This paper investigates the correlation between socio-economic status and law enforcement activities in Toronto by analyzing arrest count data and median household income across the city's wards. Utilizing data from the Toronto Police Service and the 2021 Toronto Census, the research reveals significant disparities in arrest counts between wards categorized as 'low-income household neighbourhoods' and 'high-income household neighbourhoods.' Notably, it was found that some low-income areas, such as Ward 20 (Scarborough-Agincourt), experience higher arrest counts, while certain high-income wards like Ward 10 (Spadina-Fort York) also report substantial arrest figures, illustrating that socio-economic status is not a singular predictor of law enforcement activity. The findings of this study are crucial for urban policymakers and planners, as they underscore the complex interplay between socio-economic factors and crime within urban settings, highlighting the need for nuanced approaches to law enforcement and social policy in diverse urban communities. 
+## Overview
+The project explores the intricate relationship between socio-economic status and law enforcement activities within the diverse urban landscape of Toronto. The primary focus is on examining arrest count data and median household income across the city's wards, aiming to uncover patterns and disparities.
 ## File Structure
 The repo is structured as:
 
