@@ -12,10 +12,10 @@ The repo is structured as:
 ## How to reproduce this paper
 1. Click the Green `Code` button above and copy the `HTTPS` or copy this: `https://github.com/davidjamesdimalanta/toronto_arrests_analysis.git`
 2. in the terminal of your project directory, run `git clone https://github.com/davidjamesdimalanta/toronto_arrests_analysis.git`
-3. Navigate to `scripts/01-download_data.R` and run the R script
-4. Navigate to `scripts/02-data_cleaning.R` and run the R script
-5. Navigate to `scripts/03-test_data.R` and run the R script 
-6. Navigate to `scripts/00-simulate_data.R` and run the R script
+3. Navigate to `scripts/00-simulate_data.R` and run the R script
+4. Navigate to `scripts/01-download_data.R` and run the R script
+5. Navigate to `scripts/02-data_cleaning.R` and run the R script
+6. Navigate to `scripts/03-test_data.R` and run the R script  
 7. Navigate to `outputs/paper/paper.qmd` and render the quarto file
 
 ## LLM usage
