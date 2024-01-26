@@ -1,5 +1,13 @@
+#### Preamble ####
+# Purpose: Download the 2023 Toronto Arrest Countes data set
+# from OpenDataToronto & the Toronto Census Data
+# Author: David James Dimalanta
+# Date: January 26 2024
+# Contact: David James Dimalanta
+# License: MIT
+# Pre-requisites: none
+
 #install necesarry packages to reproduce paper
-install.packages("tidyverse")
 install.packages("opendatatoronto")
 install.packages("readr")
 install.packages("knitr")
@@ -7,7 +15,6 @@ install.packages("janitor")
 install.packages("ggplot2")
 install.packages("testthat")
 library(janitor)
-library(tidyverse)
 library(opendatatoronto)
 library(readr)
 library(knitr)

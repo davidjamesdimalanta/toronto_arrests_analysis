@@ -1,5 +1,6 @@
 ---
 title: "Socio-Economic Disparities and Law Enforcement in Toronto: An Analysis of Arrest Trends and Median Household Income Across City Wards"
+thanks: Code and data from this analysis are available at https://github.com/davidjamesdimalanta/toronto_arrests_analysis
 author: "David James Dimalanta"
 date: today
 date-format: long
@@ -10,15 +11,6 @@ toc: true
 toc-depth: 5
 number-sections: true
 bibliography: references.bib
-header-includes:
-  - |
-    \usepackage{titling}
-    \pretitle{\begin{center}\LARGE\bfseries}
-    \posttitle{\end{center}}
-    \preauthor{\begin{center}\large}
-    \postauthor{\end{center}}
-    \predate{\begin{center}\large}
-    \postdate{\end{center}\vskip 0.5em\footnotesize{Code and data from this analysis are available at: \url{https://github.com/davidjamesdimalanta/toronto_arrests_analysis}}}
 ---
 
 ```{r setup, include=FALSE}

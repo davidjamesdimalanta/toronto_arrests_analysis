@@ -1,18 +1,11 @@
-#install necesarry packages to reproduce paper
-install.packages("tidyverse")
-install.packages("opendatatoronto")
-install.packages("readr")
-install.packages("knitr")
-install.packages("janitor")
-install.packages("ggplot2")
-install.packages("testthat")
-library(janitor)
-library(tidyverse)
-library(opendatatoronto)
-library(readr)
-library(knitr)
-library(ggplot2)
-library(testthat)
+#### Preamble ####
+# Purpose: Test the cleaned 2023 Toronto Arrest Countes &
+# the Toronto Census Data data sets from OpenDataToronto
+# Author: David James Dimalanta
+# Date: January 26 2024
+# Contact: David James Dimalanta
+# License: MIT
+# Pre-requisites: 01-data_cleaning.R
 
 # Verifying Column Names and Types using "testthat" package
 expected_cols <- c("age_cohort", "age_group")
